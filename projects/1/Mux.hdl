@@ -1,0 +1,17 @@
+CHIP Mux {
+    IN a, b, sel;
+    OUT out;
+
+    PARTS:
+    // Compute NOT(sel)
+    Not(in=sel, out=notsel);
+
+    // Compute term1 = (notsel AND a)
+    And(a=notsel, b=a, out=term1);
+
+    // Compute term2 = (sel AND b)
+    And(a=sel, b=b, out=term2);
+
+    // Combine term1 and term2 using OR
+    Or(a=term1, b=term2, out=out);
+}
